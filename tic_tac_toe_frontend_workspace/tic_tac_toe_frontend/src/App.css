@@ -1,0 +1,219 @@
+/* Theme & palette for Tic Tac Toe Web App */
+
+/* Color palette based on requirements */
+:root {
+  --primary: #1976d2;
+  --accent: #ff9800;
+  --secondary: #424242;
+  --bg: #fff;
+  --bg-secondary: #f7f9fb;
+  --mark-x: #1976d2;
+  --mark-o: #ff9800;
+  --cell-border: #1976d224;
+  --shadow: 0 4px 24px 0 rgba(25, 118, 210, 0.08);
+
+  --font-main: 'Inter', 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+  --transition: 0.16s cubic-bezier(0.4,0,0.2,1);
+}
+
+body {
+  background: var(--bg);
+  font-family: var(--font-main);
+  margin: 0;
+  color: var(--secondary);
+}
+
+/* Centering layout for all content */
+.ttt-bg {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-secondary);
+  transition: background 0.3s;
+}
+
+.ttt-center-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px;
+  background: var(--bg);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  min-width: 320px;
+  max-width: 360px;
+  margin: 32px auto;
+}
+
+.ttt-title {
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 64px);
+  grid-template-rows: repeat(3, 64px);
+  gap: 10px;
+  margin-bottom: 22px;
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.ttt-cell {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  border: 2.5px solid var(--cell-border);
+  border-radius: 10px;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--secondary);
+  transition: border 0.12s var(--transition), box-shadow var(--transition), background 0.12s;
+  box-shadow: 0 2px 8px 0 rgba(25, 118, 210, 0.06);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  will-change: background, border;
+  user-select: none;
+  overflow: hidden;
+}
+
+.ttt-cell:disabled {
+  cursor: default;
+  opacity: 0.84;
+}
+
+.ttt-mark {
+  display: block;
+  font-size: 2.3rem;
+  transition: color 0.2s;
+}
+
+.ttt-cell .ttt-mark {
+  color: var(--secondary);
+}
+
+/* X and O coloring */
+.ttt-cell .ttt-mark:contains("X"),
+.ttt-mark-pop:contains("X") {
+  color: var(--mark-x);
+}
+.ttt-cell .ttt-mark:contains("O"),
+.ttt-mark-pop:contains("O") {
+  color: var(--mark-o);
+}
+
+/* Pop-in mark animation */
+.ttt-mark-pop {
+  animation: pop-in 0.22s cubic-bezier(0.65,0.05,0.36,1.3);
+}
+
+/* Last move minimal highlight */
+.ttt-cell-last {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 4px #ffe3bc44, 0 2px 8px 0 rgba(255, 152, 0, 0.15);
+}
+
+/* Winning line cells shimmer/animation */
+.ttt-cell-win {
+  border-color: var(--primary) !important;
+  background: linear-gradient(90deg, #f9feff 70%, #1976d210 100%);
+  box-shadow: 0 0 0 3px #1976d244, 0 2px 8px 0 rgba(25,118,210,.10);
+  animation: win-shine 1.2s cubic-bezier(.4,0,.2,1) 1;
+}
+
+/* Status text styles */
+.ttt-status {
+  margin: 16px 0 16px;
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: var(--secondary);
+  min-height: 28px;
+}
+
+/* Reset/New Game button */
+.ttt-reset-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 11px 36px;
+  border-radius: 8px;
+  margin: 8px 0 12px;
+  font-size: 1.11rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1.5px 6px 0 #1976d21a;
+  letter-spacing: .02em;
+  transition: background 0.16s, transform 0.13s;
+}
+
+.ttt-reset-btn:hover, .ttt-reset-btn:focus {
+  background: #125aad;
+  transform: translateY(-2px) scale(1.04);
+}
+
+.ttt-reset-btn:active {
+  background: #14539a;
+  transform: translateY(0) scale(1.0);
+}
+
+.ttt-footer {
+  font-size: 0.97rem;
+  color: #9ca8b3;
+  margin-top: 24px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+@media (max-width: 480px) {
+  .ttt-center-area {
+    min-width: 0;
+    max-width: 98vw;
+    padding: 14vw 0 9vw 0;
+  }
+
+  .ttt-board {
+    grid-template-columns: repeat(3, 20vw);
+    grid-template-rows: repeat(3, 20vw);
+    gap: 3vw;
+    margin-bottom: 8vw;
+  }
+  .ttt-cell {
+    width: 20vw;
+    height: 20vw;
+    font-size: 8vw;
+  }
+  .ttt-title {
+    font-size: 2rem;
+    margin-bottom: 7vw;
+  }
+}
+
+@media (max-width: 340px) {
+  .ttt-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Animations */
+@keyframes pop-in {
+  0% { transform: scale(0.4); opacity: 0.2; }
+  60% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1.0); opacity: 1; }
+}
+@keyframes win-shine {
+  0% { background: #f9feff; }
+  80% { background: linear-gradient(90deg, #f9feff 60%, #1976d210 90%); }
+  100% { background: linear-gradient(90deg, #f9feff 70%, #1976d210 100%); }
+}
